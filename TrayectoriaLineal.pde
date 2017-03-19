@@ -20,6 +20,18 @@
      type = ttype;
    }
    
+   float GetFunction () {
+     return t;
+   }
+   
+   float CenterDistance () {
+     return abs ((xi+xf)/2 - coord ());
+   }
+   
+   float CenDisNormalized () {
+     return CenterDistance ()/(xi/2);
+   }
+   
    void OnSetup () {
      t0 = 0;
    }

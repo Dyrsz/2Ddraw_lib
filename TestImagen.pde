@@ -1,7 +1,6 @@
  TrayectoriaLineal tr;
  
- float t,t0, dx1, dy1, dx2, dy2;
- boolean sentido = false;
+ float x1, y1, x2, y2;
  
  void setup () {
    tr = new TrayectoriaLineal (height/2-300, height/2+300, 0.02, true, 3);
@@ -11,20 +10,20 @@
  void draw () {
    background (0);
    tr.OnDraw ();
-   dx1 = width/2;
-   dy1 = tr.coord ();
+   x1 = width/2;
+   y1 = tr.coord ();
    for (int i = 0; i < 10; i++) {
      noFill ();
-     stroke (200);
+     stroke (tr.CenDisNormalized ()*255);
      if (i%2 == 1) {
-       ellipse (dx1, dy1, 500, 500);
+       ellipse (x1, y1, 500, 500);
      } else {
-       polygon (6, dx1, dy1, 250, 2*PI/12 + i*2*PI/10, color (200));
+       polygon (6, x1, y1, 250, 2*PI/12 + i*2*PI/10, color (tr.CenDisNormalized ()*255));
      }
-     dx2 = rot (dx1,dy1,width/2,height/2,2*PI/10)[0];
-     dy2 = rot (dx1,dy1,width/2,height/2,2*PI/10)[1];
-     dx1 = dx2;
-     dy1 = dy2;
+     x2 = rot (x1,y1,width/2,height/2,2*PI/10)[0];
+     y2 = rot (x1,y1,width/2,height/2,2*PI/10)[1];
+     x1 = x2;
+     y1 = y2;
    }
  }
  
@@ -39,6 +38,7 @@
      x2 = rot (x1, y1, cx, cy, 2*PI/n)[0];
      y2 = rot (x1, y1, cx, cy, 2*PI/n)[1];
      stroke (col);
+     strokeWeight(10);
      line (x1,y1,x2,y2);
      x1 = x2;
      y1 = y2;
